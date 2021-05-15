@@ -80,7 +80,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h">
+			<Option target="syntactic_analysis"/>
+		</Unit>
+		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h">
+			<Option target="syntactic_analysis"/>
+		</Unit>
 		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/main.cpp">
+			<Option target="syntactic_analysis"/>
+		</Unit>
+		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/source/syntactic_analyzer.cpp">
 			<Option target="syntactic_analysis"/>
 		</Unit>
 		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/CMakeLists.txt">

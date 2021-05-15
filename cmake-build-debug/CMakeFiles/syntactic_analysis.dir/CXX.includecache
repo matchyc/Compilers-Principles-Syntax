@@ -6,13 +6,27 @@
 
 #IncludeRegexTransform: 
 
-D:/mycode/cpp_workspace/syntactic_analysis/main.cpp
-iostream
+D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h
+utils.h
+D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h
+unordered_map
 -
+
+D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h
 vector
 -
-map
--
 string
+-
+unordered_map
+-
+set
+-
+
+D:/mycode/cpp_workspace/syntactic_analysis/source/syntactic_analyzer.cpp
+../header/syntactic_analyzer.h
+D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h
+fstream
+-
+iostream
 -
 

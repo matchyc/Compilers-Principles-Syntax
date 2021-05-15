@@ -169,6 +169,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\syntactic_analysis.dir\build.make CMakeFiles/syntactic_analysis.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+source/syntactic_analyzer.obj: source/syntactic_analyzer.cpp.obj
+
+.PHONY : source/syntactic_analyzer.obj
+
+# target to build an object file
+source/syntactic_analyzer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\syntactic_analysis.dir\build.make CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj
+.PHONY : source/syntactic_analyzer.cpp.obj
+
+source/syntactic_analyzer.i: source/syntactic_analyzer.cpp.i
+
+.PHONY : source/syntactic_analyzer.i
+
+# target to preprocess a source file
+source/syntactic_analyzer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\syntactic_analysis.dir\build.make CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.i
+.PHONY : source/syntactic_analyzer.cpp.i
+
+source/syntactic_analyzer.s: source/syntactic_analyzer.cpp.s
+
+.PHONY : source/syntactic_analyzer.s
+
+# target to generate assembly for a file
+source/syntactic_analyzer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\syntactic_analysis.dir\build.make CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.s
+.PHONY : source/syntactic_analyzer.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -181,6 +208,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... source/syntactic_analyzer.obj
+	@echo ... source/syntactic_analyzer.i
+	@echo ... source/syntactic_analyzer.s
 .PHONY : help
 
 

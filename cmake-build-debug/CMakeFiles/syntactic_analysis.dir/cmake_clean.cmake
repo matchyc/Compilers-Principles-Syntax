@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/syntactic_analysis.dir/main.cpp.obj"
+  "CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj"
   "libsyntactic_analysis.dll.a"
   "syntactic_analysis.exe"
   "syntactic_analysis.exe.manifest"

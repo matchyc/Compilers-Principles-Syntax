@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/mycode/cpp_workspace/syntactic_analysis/main.cpp" "D:/mycode/cpp_workspace/syntactic_analysis/cmake-build-debug/CMakeFiles/syntactic_analysis.dir/main.cpp.obj"
+  "D:/mycode/cpp_workspace/syntactic_analysis/source/syntactic_analyzer.cpp" "D:/mycode/cpp_workspace/syntactic_analysis/cmake-build-debug/CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

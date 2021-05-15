@@ -93,12 +93,12 @@ clean: CMakeFiles/syntactic_analysis.dir/clean
 CMakeFiles/syntactic_analysis.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\syntactic_analysis.dir\build.make CMakeFiles/syntactic_analysis.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\syntactic_analysis.dir\build.make CMakeFiles/syntactic_analysis.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\mycode\cpp_workspace\syntactic_analysis\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target syntactic_analysis"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\mycode\cpp_workspace\syntactic_analysis\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target syntactic_analysis"
 .PHONY : CMakeFiles/syntactic_analysis.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/syntactic_analysis.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\mycode\cpp_workspace\syntactic_analysis\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\mycode\cpp_workspace\syntactic_analysis\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/syntactic_analysis.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\mycode\cpp_workspace\syntactic_analysis\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/syntactic_analysis.dir/rule
