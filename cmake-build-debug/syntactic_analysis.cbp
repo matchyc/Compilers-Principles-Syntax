@@ -83,6 +83,9 @@
 		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h">
 			<Option target="syntactic_analysis"/>
 		</Unit>
+		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/header/text_table.h">
+			<Option target="syntactic_analysis"/>
+		</Unit>
 		<Unit filename="D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h">
 			<Option target="syntactic_analysis"/>
 		</Unit>

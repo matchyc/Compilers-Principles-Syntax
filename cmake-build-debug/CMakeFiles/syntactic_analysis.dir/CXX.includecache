@@ -16,6 +16,20 @@ iostream
 iomanip
 -
 
+D:/mycode/cpp_workspace/syntactic_analysis/header/text_table.h
+iostream
+-
+map
+-
+iomanip
+-
+vector
+-
+string
+-
+clocale
+-
+
 D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h
 vector
 -
@@ -35,4 +49,6 @@ list
 D:/mycode/cpp_workspace/syntactic_analysis/source/syntactic_analyzer.cpp
 ../header/syntactic_analyzer.h
 D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h
+../header/text_table.h
+D:/mycode/cpp_workspace/syntactic_analysis/header/text_table.h
 

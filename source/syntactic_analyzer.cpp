@@ -3,7 +3,7 @@
 //
 
 #include "../header/syntactic_analyzer.h"
-
+#include "../header/text_table.h"
 //using namespace std;
 
 syntactic_analyzer::syntactic_analyzer() {
@@ -12,7 +12,7 @@ syntactic_analyzer::syntactic_analyzer() {
 }
 
 void syntactic_analyzer::do_work() {
-    input = "1+1$";
+    input = "1+1";
     calc_first_set();
     calc_dfa();
     total_state = dfa_.family.size();
@@ -25,9 +25,13 @@ void syntactic_analyzer::do_work() {
 void syntactic_analyzer::actually_analyze() {
     using namespace std;
 //    printf("step\t\tsymbol_statck_\t\tstate\t\tinput\t\taction\n");
-    cout << "step" << setw(20) << "symbol_stack" << setw(20)
-         << setw(20) << setw(20) << "state_stack" << setw(20) << "input" <<
-         setw(20) << setw(20)<< "action" << endl;
+    TextTable t( '-', '|', '+' );
+    t.add("step");
+    t.add("symbol_stack");
+    t.add("state_stack");
+    t.add("input");
+    t.add("action");
+    t.endOfRow();
     while (true)
     {
         if (isdigit(input[0])) //处理数字
@@ -64,30 +68,65 @@ void syntactic_analyzer::actually_analyze() {
         }
         else if (action == "ACC")
         {
-            printf("Accept!");
+            t.setAlignment(2, TextTable::Alignment::LEFT);
+            std::cout << t;
+            printf("Accept!\n");
             break;
         }
         else {
+            t.setAlignment(2, TextTable::Alignment::LEFT);
+            std::cout << t;
             std::cout << "error" << std::endl;
             exit(-2);
         }
         //分析结束输出
-        using namespace std;
 
-        cout << setw(2) << step_++ << '|';
-        for (int i = 0; i < symbol_statck_.size(); i++) //输出栈的状态
+//        cout << "step" << "|" << setw(20) << "symbol_stack" << setw(10)
+//             << '|' << setw(20) << "state_stack" << setw(10) << '|' << setw(10)
+//             << "input" << setw(10) << '|' << setw(10)<< "action" << endl;
 
-            printf("%c", symbol_statck_[i]);
-        printf("\t\t");
-        for (int i = 0; i < state_stack_.size(); i++)
-            printf("%d", state_stack_[i]);
-        printf("\t\t");
-        for (int i = 0; i < input.size(); i++)
-            printf("%c", input[i]);
-        printf("\t\t");
-        printf("%s", tip.c_str());
-        printf("\n");
+
+
+
+
+        cout.setf(std::ios::right);
+//        cout << setw(4) << step_++ << '|';
+//        cout << setw(12);
+        std::string s(std::to_string(step_++));
+        t.add(s);
+        s.clear();
+        for (int i = 0; i < symbol_statck_.size(); i++) { //输出栈的状态
+            s += symbol_statck_[i];
+        }
+        t.add(s);
+            //            printf("%c", symbol_statck_[i]);
+//        cout << setw(18) << '|' << setw(12);
+        s.clear();
+        for (int i = 0; i < state_stack_.size(); i++) {
+            s += std::to_string(state_stack_[i]) + ' ';
+        }
+        t.add(s);
+        s.clear();
+            //            printf("%d", state_stack_[i]);
+        //printf("\t\t");
+//        cout << setw(10) << '|' << setw(20);
+        for (int i = 0; i < input.size(); i++) {
+            s += input[i];
+        }
+        t.add(s);
+        s.clear();
+            //            printf("%c", input[i]);
+//        printf("\t\t");
+//        cout << setw(10);
+//        printf("%s", tip.c_str());
+        t.add(tip);
+        s.clear();
+        t.endOfRow();
+
     }
+//    t.setAlignment(2, TextTable::Alignment::LEFT);
+//    std::cout << t;
+
 }
 
 void syntactic_analyzer::display_analyze_table() {

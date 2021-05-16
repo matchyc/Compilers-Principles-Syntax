@@ -6,6 +6,7 @@ CMakeFiles/syntactic_analysis.dir/main.cpp.obj: ../header/utils.h
 CMakeFiles/syntactic_analysis.dir/main.cpp.obj: ../main.cpp
 
 CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj: ../header/syntactic_analyzer.h
+CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj: ../header/text_table.h
 CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj: ../header/utils.h
 CMakeFiles/syntactic_analysis.dir/source/syntactic_analyzer.cpp.obj: ../source/syntactic_analyzer.cpp
 
