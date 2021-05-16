@@ -10,43 +10,76 @@
 #include <string>
 #include <unordered_map>
 #include <set>
+#include <fstream>
+#include <iostream>
+#include <list>
 
-//äº§ç”Ÿå¼è§„åˆ™å®šä¹‰
-//è€ƒè™‘ä¸€èˆ¬æƒ…å†µï¼Œå·¦è¾¹å•ä¸ªéç»ˆç»“ç¬¦ï¼Œå³è¾¹ä¸ºä¸²
+//²úÉúÊ½¹æÔò¶¨Òå
+//¿¼ÂÇÒ»°ãÇé¿ö£¬×ó±ßµ¥¸ö·ÇÖÕ½á·û£¬ÓÒ±ßÎª´®
 struct ProductionRule{
     std::string left;
     std::string right;
+    bool operator == (ProductionRule& r) {
+        if(this->left != r.left) {
+            return false;
+        }
+        return this->right == r.right;
+    }
+    ProductionRule() {};
+    ProductionRule(const ProductionRule& r) {
+        this->left = r.left;
+        this->right = r.right;
+    }
 };
 
-//Grammar æ–‡æ³•
+//Grammar ÎÄ·¨
 struct Grammar{
-    std::set<std::string> terminal;    //ç»ˆç»“ç¬¦
-    std::set<std::string> non_terminal;    //éç»ˆç»“ç¬¦
-    std::vector<ProductionRule> rules;   //äº§ç”Ÿå¼è§„åˆ™
+    std::set<std::string> terminal;    //ÖÕ½á·û
+    std::set<std::string> non_terminal;    //·ÇÖÕ½á·û
+    std::vector<ProductionRule> rules;   //²úÉúÊ½¹æÔò
 };
 
 
-//LR(1)é¡¹ç›®
+//LR(1)ÏîÄ¿
 struct Item{
     ProductionRule r;
-    std::string lookahead; // å‘å‰çœ‹å­—ç¬¦
-    int point_loc;  // ç‚¹çš„ä½ç½®ä¿¡æ¯
+    std::string lookahead; // ÏòÇ°¿´×Ö·û
+    int point_loc;  // µãµÄÎ»ÖÃĞÅÏ¢
     Item();
     Item(ProductionRule r, std::string lookahead, int loc):
     r(r), lookahead(lookahead), point_loc(loc){};
+    friend std::ostream& operator << (std::ostream& os, const struct Item& r) {
+        struct ProductionRule temp;
+        temp.right = r.r.right;
+        temp.right.insert(r.point_loc, "¡¤");
+        std::cout << r.r.left << "->" << temp.right << " " << r.lookahead << std::endl;
+        return os;
+    };
+    bool operator == (const struct Item& r) {
+        if(point_loc != r.point_loc)
+            return false;
+        if(lookahead != r.lookahead)
+            return false;
+        if(this->r.left != r.r.left)
+            return false;
+        if(this->r.right != r.r.right)
+            return false;
+        return true;
+    }
 };
 
-//LR(1)é¡¹ç›®é›†
+//LR(1)ÏîÄ¿¼¯
 struct ItemSet{
+    int no;
     std::vector<Item> items;
 };
 
-//LR(1)é¡¹ç›®é›†è§„èŒƒæ—
+//LR(1)ÏîÄ¿¼¯¹æ·¶×å
 struct ItemSetDFA{
-    std::vector<ItemSet> family;   //æ‰€æœ‰çš„é¡¹ç›®é›†
-    std::vector<std::unordered_map<std::string,int>> strategy; // è½¬ç§»æ–¹å¼
+    std::vector<ItemSet> family;   //ËùÓĞµÄÏîÄ¿¼¯
+    std::vector<std::unordered_map<std::string,int>> strategy; // ×ªÒÆ·½Ê½
 };
 
-
+int char_to_num(char ch);
 
 #endif //SYNTACTIC_ANALYSIS_UTILS_H

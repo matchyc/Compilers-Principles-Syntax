@@ -11,6 +11,10 @@ utils.h
 D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h
 unordered_map
 -
+iostream
+-
+iomanip
+-
 
 D:/mycode/cpp_workspace/syntactic_analysis/header/utils.h
 vector
@@ -21,12 +25,14 @@ unordered_map
 -
 set
 -
-
-D:/mycode/cpp_workspace/syntactic_analysis/source/syntactic_analyzer.cpp
-../header/syntactic_analyzer.h
-D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h
 fstream
 -
 iostream
 -
+list
+-
+
+D:/mycode/cpp_workspace/syntactic_analysis/source/syntactic_analyzer.cpp
+../header/syntactic_analyzer.h
+D:/mycode/cpp_workspace/syntactic_analysis/header/syntactic_analyzer.h
 
