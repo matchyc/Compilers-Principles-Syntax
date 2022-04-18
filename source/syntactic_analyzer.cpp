@@ -1,5 +1,5 @@
 //
-// Created by 15126 on 2021/5/15.
+// Created by mengchen on 2021/5/15.
 //
 
 #include "../header/syntactic_analyzer.h"
@@ -12,19 +12,24 @@ syntactic_analyzer::syntactic_analyzer() {
 }
 
 void syntactic_analyzer::do_work() {
-    input = "1+1";
-    calc_first_set();
-    calc_dfa();
+    calc_first_set();   //首先计算first集
+    calc_dfa();         //计算DFA
+
     total_state = dfa_.family.size();
-    get_analyze_table();
-    display_analyze_table();
+
+    get_analyze_table();    //自动构造分析表
+    display_analyze_table();    //打印分析表
+
     state_stack_.push_back(0);
-    actually_analyze();
+    std::cout << "Please enter a math expression: " << std::endl;
+    std::cin >> input;
+    input += '$';
+
+    actually_analyze();     //分析输入串
 }
 
 void syntactic_analyzer::actually_analyze() {
     using namespace std;
-//    printf("step\t\tsymbol_statck_\t\tstate\t\tinput\t\taction\n");
     TextTable t( '-', '|', '+' );
     t.add("step");
     t.add("symbol_stack");
@@ -32,8 +37,7 @@ void syntactic_analyzer::actually_analyze() {
     t.add("input");
     t.add("action");
     t.endOfRow();
-    while (true)
-    {
+    while (true) {
         if (isdigit(input[0])) //处理数字
         {
             while (isdigit(input[0]) || input[0] == '.') //弹出数字及浮点
@@ -73,25 +77,18 @@ void syntactic_analyzer::actually_analyze() {
             printf("Accept!\n");
             break;
         }
-        else {
+        else { //空白动作则认为出错
+            //出错位置为
             t.setAlignment(2, TextTable::Alignment::LEFT);
+            input.pop_back();
             std::cout << t;
             std::cout << "error" << std::endl;
+            std::cout << "Error Location:" << input << std::endl;
+            system("pause");
             exit(-2);
         }
         //分析结束输出
 
-//        cout << "step" << "|" << setw(20) << "symbol_stack" << setw(10)
-//             << '|' << setw(20) << "state_stack" << setw(10) << '|' << setw(10)
-//             << "input" << setw(10) << '|' << setw(10)<< "action" << endl;
-
-
-
-
-
-        cout.setf(std::ios::right);
-//        cout << setw(4) << step_++ << '|';
-//        cout << setw(12);
         std::string s(std::to_string(step_++));
         t.add(s);
         s.clear();
@@ -99,33 +96,23 @@ void syntactic_analyzer::actually_analyze() {
             s += symbol_statck_[i];
         }
         t.add(s);
-            //            printf("%c", symbol_statck_[i]);
-//        cout << setw(18) << '|' << setw(12);
         s.clear();
         for (int i = 0; i < state_stack_.size(); i++) {
             s += std::to_string(state_stack_[i]) + ' ';
         }
         t.add(s);
         s.clear();
-            //            printf("%d", state_stack_[i]);
-        //printf("\t\t");
-//        cout << setw(10) << '|' << setw(20);
+
         for (int i = 0; i < input.size(); i++) {
             s += input[i];
         }
         t.add(s);
         s.clear();
-            //            printf("%c", input[i]);
-//        printf("\t\t");
-//        cout << setw(10);
-//        printf("%s", tip.c_str());
         t.add(tip);
         s.clear();
         t.endOfRow();
 
     }
-//    t.setAlignment(2, TextTable::Alignment::LEFT);
-//    std::cout << t;
 
 }
 
@@ -133,9 +120,9 @@ void syntactic_analyzer::display_analyze_table() {
     using namespace std;
     string terminal[10] = {"num", "+", "-", "*", "/", "(", ")", "$"};
     string non_terminal[10] = {"E", "T", "F"};
-    std::cout << "state" << "|" << std::setw(30) << "action" << std::setw(30) << "|"
-    << std::setw(16)<< "goto" << std::endl;
-    cout << setw(6) << "|";
+    std::cout << "state" << "|" << "\t\t\t\t" << "action" << "\t\t\t      " << "|"
+    << "\t\t"<< "goto" << std::endl;
+    cout << "     "<< "|";
     for(auto i = 0; i < 8; ++i) {
         cout << setw(7) << terminal[i];
     }
@@ -180,9 +167,7 @@ void syntactic_analyzer::init_grammar() {
         int l_loc = input.find_first_of('-');
         rule.left = input.substr(0, l_loc);
         rule.right = input.substr(l_loc + 2, 10);
-//        if(rule.right == "num") {
-//            rule.right = "n";
-//        }
+
         this->grammar_.rules.push_back(rule);
     }
     f >> input;
@@ -192,9 +177,6 @@ void syntactic_analyzer::init_grammar() {
     }
     f >> input;
     while (input != "$") {
-//        if(input == "num") {
-//            input = "n";
-//        }
         this->grammar_.terminal.insert(input);
         f >> input;
     }
@@ -274,20 +256,26 @@ void syntactic_analyzer::calc_first_set() {
         }
     }
     printf("First set:\n");
+    TextTable t( '-', '|', '+' );
+    t.add("   ");
+    t.add("FIRST");
+    t.endOfRow();
     for (auto &i:first_set) {
         if (grammar_.non_terminal.find(i.first) != grammar_.non_terminal.end()) {
-            std::cout << i.first << " | ";
+            t.add(std::string(1,i.first[0]));
+            std::string temp_first;
             for (auto &j: i.second) {
-                std::cout << j << ' ';
+                temp_first += j + ' ';
             }
-            std::cout << std::endl;
+            t.add(temp_first);
+            t.endOfRow();
         }
     }
+    t.setAlignment(2, TextTable::Alignment::LEFT);
+    std::cout << t;
 }
 
-void syntactic_analyzer::calc_follow_set() {
 
-}
 
 
 void syntactic_analyzer::calc_dfa() {
@@ -362,34 +350,6 @@ void syntactic_analyzer::calc_dfa() {
                 dfa_.strategy[one_set.no][non_ter] = in_dfa;
             }
         }
-//        for(auto& item:one_set.items) {
-//            if(item.point_loc < item.r.right.size()) { //还不是归约项目时
-//                std::string next = item.r.right.substr(item.point_loc, 1);
-//                if(grammar_.terminal.find(next) != grammar_.terminal.end()
-//                    ||
-//                    grammar_.non_terminal.find(next) != grammar_.non_terminal.end()) {
-//                    //构造新的项目
-//                    struct ItemSet new_set;
-//                    struct Item new_item(item.r, item.lookahead, item.point_loc + 1);
-//
-//                    new_set.items.push_back(new_item);
-//                    //计算闭包
-//                    calc_item_set_closure(new_set);
-//                    int in_dfa = 0;
-//                    is_in_dfa(new_set, in_dfa);
-//                    if(in_dfa == -1) {  //若是新项目集
-//                        new_set.no = dfa_.family.size();
-//                        dfa_.family.push_back(new_set);
-//                        wait_list.push_back(new_set);
-//                        in_dfa = new_set.no;
-//                    } else {
-//                        //nothing to do
-//                    }
-//                    //自动机添加边
-//                    dfa_.strategy[one_set.no][next] = in_dfa;
-//                }
-//            }
-//        }
         wait_list.pop_front();// 出队
     }
 
@@ -434,7 +394,6 @@ void syntactic_analyzer::get_analyze_table() {
             }
         }
     }
-
 }
 
 int char_to_num(char ch)
@@ -509,7 +468,6 @@ void syntactic_analyzer::calc_item_set_closure(struct ItemSet &one_set) {
     while (not_done) {
         not_done = false;
         for (int i = 0; i < one_set.items.size(); ++i) {
-//            printf("Now item set %d have %d, scan to %d\n",one_set.no, one_set.items.size(), i);
             struct Item item = one_set.items[i];
             if (item.point_loc < item.r.right.size()) {
                 std::string next = item.r.right.substr(item.point_loc, 1);
@@ -528,17 +486,9 @@ void syntactic_analyzer::calc_item_set_closure(struct ItemSet &one_set) {
                                 //看是否重复
                                 bool isreplica = false;
                                 for (auto &p: one_set.items) {
-//                                    printf("Now compare:");
-//                                    std::cout << "In set: " << p << "generate: " << temp_item << std::endl;
-//                                    p.r.right == temp_item.r.right &&
-//                                    p.r.left == temp_item.r.left &&
-//                                    p.point_loc == temp_item.point_loc &&
-//                                    p.lookahead == temp_item.lookahead
                                     if (p == temp_item) {
                                         isreplica = true;
-//                                        std::cout << "result: " << "same!" << std::endl;
                                         break;
-
                                     } else {
                                         isreplica = false;
                                     }//ifelse
@@ -546,7 +496,6 @@ void syntactic_analyzer::calc_item_set_closure(struct ItemSet &one_set) {
                                 if (isreplica) {
                                     not_done = false;
                                 } else {
-//                                    std::cout << "result: " << "not same! insert!" << std::endl;
                                     not_done = true;
                                     one_set.items.push_back(temp_item);
                                 }
@@ -582,8 +531,5 @@ std::set<std::string> syntactic_analyzer::get_suffix_first(std::string suffix) {
             }
         }
     }
-//    if(!isok) {
-//        suffix_first.insert("@");
-//    }
     return suffix_first;
 }
