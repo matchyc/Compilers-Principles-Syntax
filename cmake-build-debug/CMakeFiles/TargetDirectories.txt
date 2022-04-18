@@ -1,3 +1,0 @@
-D:/mycode/cpp_workspace/syntactic_analysis/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/mycode/cpp_workspace/syntactic_analysis/cmake-build-debug/CMakeFiles/syntactic_analysis.dir
-D:/mycode/cpp_workspace/syntactic_analysis/cmake-build-debug/CMakeFiles/rebuild_cache.dir
