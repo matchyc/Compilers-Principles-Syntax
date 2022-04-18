@@ -1,3 +1,6 @@
+**Note:** if any student find this repository for his/her college course, DO NOT copy directly.
+**注意：** 如果有哪位学弟学妹发现了这个仓库，千万不要直接抄下来，可能会有你意想不到的情况发生。
+
 # Compilers-Principles-Syntax
 
 Syntactic analysis
@@ -38,7 +41,7 @@ Construction
 
 ### Input
 
-Basically, it's a calculator for simple  arithmetic calculation. (+, -, *, /)
+Basically, it's a calculator for simple arithmetic calculation. (+, -, \*, /)
 
 input.txt:
 
@@ -46,6 +49,7 @@ input.txt:
 - line 2 - line m + 1: `m` lines of productions
 - line m + 2: non-terminals
 - line m + 3: terminals
+
 ```
 8
 E->E+T
@@ -65,6 +69,7 @@ num + - * / ( ) $
 First Set, Follow Set, DFA, Analysis Table.
 
 Such as:
+
 ```
 First set:
 +---+-----+
@@ -137,6 +142,7 @@ Please enter a math expression:
 ```
 
 ### analyze
+
 ```
 Please enter a math expression:
 1+1
